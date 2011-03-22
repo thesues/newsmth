@@ -62,7 +62,7 @@ bookTemplate = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.
     </div>
     <div id="content">
         {% for feed in sumaryFeeds %}
-         <h3>{{feed.0.title}}</h3>
+         <h2 class="do_article_title">{{feed.0.title}}</h2>
          {%for post in feed%}
          <div class="article">
              {{post.content}}
