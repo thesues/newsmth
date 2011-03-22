@@ -14,6 +14,8 @@ from django.shortcuts import render_to_response
 from django.conf import settings
 from models import *
 from bookTemplate import bookTemplate
+from django.template import Template
+import cPickle 
 
 smthurl=settings.SMTH_URL
 sumaryFeeds=[]
@@ -51,12 +53,8 @@ articleparser=BeautyArticleProcessor()
 #    getContent(smth,articleparser,article['b'],article['gid'],feed,1)
 getContent(smth,articleparser,"LinuxDev","252618",feed,0)
 getContent(smth,articleparser,"LinuxDev","252618",feed,1)
-sumaryFeeds.append(feed)
-a=feed[:]
-a[1].title="this is a test"
-sumaryFeeds.append(a)
-#render to html
 
-t=Template(bookTemplate)
-c=Context("sumaryFeeds":sumaryFeeds)
-renderdHtml=t.render(c)   
+sumaryFeeds.append(feed)
+f=open("./testfeed","w")
+cPickle.dump(sumaryFeeds,f)
+f.close()

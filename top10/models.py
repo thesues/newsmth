@@ -8,5 +8,5 @@ class Post():
         self.content=content
         self.attached=attached
     def __str__(self):
-        return "%s:%s" % (self.author.encode("utf8"),self.content.encode("utf8"))
+        return "%s:\n%s" % (self.author.encode("utf8"),self.content.encode("utf8"))
         

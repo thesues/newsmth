@@ -1,3 +1,4 @@
+#coding:utf8
 bookTemplate = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -58,76 +59,16 @@ bookTemplate = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.
     <div id="cover">
         <h1 id="title">水木十大热点话题</h1>
         <a href="#content">Go straight to first item</a><br />
-        {{ datetime.datetime.now().strftime("%m/%d %H:%M") }}
     </div>
-    <div id="toc">
-        <h2>Feeds:</h2> 
-        <ol> 
-            {% set feed_count = 0 %}
-            {% for feed in sumaryFeeds %}
-            
-            {% if feed.item_count > 0 %}
-            {% set feed_count = feed_count + 1 %}
-            <li>
-              <a href="#sectionlist_{{ feed.idx }}">{{ feed.title }}</a>
-              <br />
-              {{ feed.item_count }} items
-            </li>
-            {% end %}
-            
-            {% end %}
-        </ol> 
-          
-        {% for feed in feeds %}
-        {% if feed.item_count > 0 %}
-        <mbp:pagebreak></mbp:pagebreak>
-        <div id="sectionlist_{{ feed.idx }}" class="section">
-            {% if feed.idx < feed_count %}
-            <a href="#sectionlist_{{ feed.idx+1 }}">Next Feed</a> |
-            {% end %}
-            
-            {% if feed.idx > 1 %}
-            <a href="#sectionlist_{{ feed.idx-1 }}">Previous Feed</a> |
-            {% end %}
-        
-            <a href="#toc">TOC</a> |
-            {{ feed.idx }}/{{ feed_count }} |
-            {{ feed.item_count }} items
-            <br />
-            <h3>{{ feed.title }}</h3>
-            <ol>
-                {% for item in feed.items %}
-                <li>
-                  <a href="#article_{{ feed.idx }}_{{ item.idx }}">{{ item.title }}</a><br/>
-                  {% if item.published %}{{ item.published }}{% end %}
-                </li>
-                {% end %}
-            </ol>
-        </div>
-        {% end %}
-        {% end %}
-    </div>
-    <mbp:pagebreak></mbp:pagebreak>
     <div id="content">
-        {% for feed in feeds %}
-        {% if feed.item_count > 0 %}
-        <div id="section_{{ feed.idx }}" class="section">
-        {% for item in feed.items %}
-        <div id="article_{{ feed.idx }}_{{ item.idx }}" class="article">
-            <h2 class="do_article_title">
-              {% if item.url %}
-              <a href="{{ item.url }}">{{ item.title }}</a>
-              {% else %}
-              {{ item.title }}
-              {% end %}
-            </h2>
-            {% if item.published %}{{ item.published }}{% end %}
-            <div>{{ item.content }}</div>
-        </div>
-        {% end %}
-        </div>
-        {% end %}
-        {% end %}
+        {% for feed in sumaryFeeds %}
+         <h3>{{feed.0.title}}</h3>
+         {%for post in feed%}
+         <div class="article">
+             {{post.content}}
+         </div>
+        {%endfor%}
+        {%endfor%}
     </div>
 </body>
 </html>
