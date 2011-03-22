@@ -57,7 +57,8 @@ bookTemplate = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.
 </head>
 <body>
     <div id="cover">
-        <h1 id="title">水木十大热点话题</h1>
+        <h1 id="title">水木十大热点话题</h1><br>
+        {{datetime.datetime.now}}
         <a href="#content">Go straight to first item</a><br />
     </div>
     <div id="content">

@@ -28,7 +28,7 @@ def getContent(smth,parser,board,articleid,feed,next):
         #to be contented
 #        print result["c"]
 #        pdb.set_trace()
-        a=Post(author=result["a"],content=result["c"],attached=False,title=result['t'])
+        a=Post(author=result["a"],content=result["c"].replace("\n","<br>"),attached=False,title=result['t'])
         feed.append(a)
     elif next==1:
         out=smth.get_url_data(smthurl+"?act=article&board="+board+"&id="+articleid+"&p=tn")
@@ -36,7 +36,7 @@ def getContent(smth,parser,board,articleid,feed,next):
         parser.feed(unicode(out,"gbk","ignore"))
         result=parser.getall()
         #print result["c"]
-        a=Post(author=result["a"],content=result["c"],attached=False,title=result['t'])
+        a=Post(author=result["a"],content=result["c"].replace("\n","<br>"),attached=False,title=result['t'])
         feed.append(a)
         #to be contented
         if result["id"]!=articleid:
@@ -51,10 +51,10 @@ articleparser=BeautyArticleProcessor()
 #for article in top10parser.getall():
 #    getContent(smth,articleparser,article['b'],article['gid'],feed,0)
 #    getContent(smth,articleparser,article['b'],article['gid'],feed,1)
-getContent(smth,articleparser,"LinuxDev","252618",feed,0)
-getContent(smth,articleparser,"LinuxDev","252618",feed,1)
 
+getContent(smth,articleparser,"FamilyLife","10285873",feed,0)
+print feed[0].content
 sumaryFeeds.append(feed)
-f=open("./testfeed","w")
+f=open("./newtestfeed","w")
 cPickle.dump(sumaryFeeds,f)
 f.close()
