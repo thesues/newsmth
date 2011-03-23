@@ -58,19 +58,39 @@ bookTemplate = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.
 <body>
     <div id="cover">
         <h1 id="title">水木十大热点话题</h1><br>
-        {{datetime.datetime.now}}
-        <a href="#content">Go straight to first item</a><br />
+        <a href="#content">jump to the first item</a><br />
     </div>
-    <div id="content">
-        {% for feed in sumaryFeeds %}
-         <h2 class="do_article_title">{{feed.0.title}}</h2>
-         {%for post in feed%}
+
+<div id="toc">
+<ol>
+{%for feed in sumaryFeeds%}
+<li>
+<a href="#sectionlist_{{forloop.counter}}">{{feed.title}}</a>
+<br />
+{{feed.numOfPosts}}items
+</li>
+{%endfor%}
+</ol>
+</div>
+
+<mbp:pagebreak></mbp:pagebreak>
+
+
+</div>
+    
+<div id="content">
+
+{% for feed in sumaryFeeds %}
+<div id="sectionlist_{{forloop.counter}}" class=section">
+ <h2 class="do_article_title">{{feed.title}}</h2>
+{%for post in feed.list%}
          <div class="article">
              {{post.content}}
          </div>
-        {%endfor%}
-        {%endfor%}
-    </div>
+{%endfor%}
+</div>
+{%endfor%}
+</div>
 </body>
 </html>
 """

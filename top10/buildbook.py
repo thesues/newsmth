@@ -19,7 +19,7 @@ import cPickle
 
 smthurl=settings.SMTH_URL
 sumaryFeeds=[]
-feed=[]
+feed=Feed()
 def getContent(smth,parser,board,articleid,feed,next):
     if next==0:
         out=smth.get_url_data(smthurl+"?act=article&board="+board+"&id="+articleid)
@@ -28,7 +28,8 @@ def getContent(smth,parser,board,articleid,feed,next):
         #to be contented
 #        print result["c"]
 #        pdb.set_trace()
-        a=Post(author=result["a"],content=result["c"].replace("\n","<br>"),attached=False,title=result['t'])
+        a=Post(author=result["a"],content=result["c"]),attached=False)
+        feed.title=result['t']
         feed.append(a)
     elif next==1:
         out=smth.get_url_data(smthurl+"?act=article&board="+board+"&id="+articleid+"&p=tn")
@@ -36,8 +37,10 @@ def getContent(smth,parser,board,articleid,feed,next):
         parser.feed(unicode(out,"gbk","ignore"))
         result=parser.getall()
         #print result["c"]
-        a=Post(author=result["a"],content=result["c"].replace("\n","<br>"),attached=False,title=result['t'])
+        a=Post(author=result["a"],content=result["c"],attached=False)
         feed.append(a)
+        if(feed.numOfPosts>100):
+            return
         #to be contented
         if result["id"]!=articleid:
             getContent(smth,parser,board,result["id"],feed,1)
@@ -53,8 +56,9 @@ articleparser=BeautyArticleProcessor()
 #    getContent(smth,articleparser,article['b'],article['gid'],feed,1)
 
 getContent(smth,articleparser,"FamilyLife","10285873",feed,0)
-print feed[0].content
+getContent(smth,articleparser,"FamilyLife","10285873",feed,1)
+print feed.title
 sumaryFeeds.append(feed)
-f=open("./newtestfeed","w")
+f=open("./testfeed","w")
 cPickle.dump(sumaryFeeds,f)
 f.close()
