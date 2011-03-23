@@ -17,3 +17,5 @@ class Feed():
     def append(self,post):
         self.list.append(post)
         self.numOfPosts=self.numOfPosts+1
+    def __str__(self):
+        return self.title.encode("utf8")
