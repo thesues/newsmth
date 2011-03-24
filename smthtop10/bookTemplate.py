@@ -8,6 +8,7 @@ bookTemplate = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.
     body{
         font-size: 1.1em;
         margin:0 5px;
+
     }
 
     h1{
@@ -53,12 +54,24 @@ bookTemplate = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.
         margin-top:10px;
         page-break-after: always;
     }
+    #ref
+    {
+        margin-top:10px;
+        page-break-after: always;
+    }
+    #signature
+    {
+        margin-top:10px;
+        font-size: 50%;
+        page-break-after: always;
+        background:#eee;
+    }
     </style>
 </head>
 <body>
     <div id="cover">
         <h1 id="title">水木十大热点话题</h1><br>
-        <a href="#content">jump to the first item</a><br />
+<!--        <a href="#content">jump to the first item</a><br />-->
     </div>
 
 <div id="toc">
@@ -88,6 +101,10 @@ bookTemplate = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.
 <!--             <a href="#sectionlist_{{forloop.parentloop.counter}}">back to lz</a> -->
              <br />
              {{post.content|linebreaksbr}}
+          <div id="signature">
+             {{post.signature|linebreaksbr}}
+          </div>
+             ============================================
          </div>
 {%endfor%}
 </div>

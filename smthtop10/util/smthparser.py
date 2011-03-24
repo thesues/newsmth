@@ -198,6 +198,8 @@ class BeautyArticleProcessor(HTMLParser):
     def __init__(self):
         HTMLParser.__init__(self)
         self.content = ""
+        self.signature=""
+        self.reference=""
         self.btag = 0
         self.count =0
         self.acount =0
@@ -208,9 +210,14 @@ class BeautyArticleProcessor(HTMLParser):
         self.author = ''
         self.date = ''
         self.space = 0
+        self.contentTag=0
+        self.signTag=0
+        self.refTag=0
     def reset(self):
         HTMLParser.reset(self)
         self.content = ""
+        self.signature=""
+        self.reference=""
         self.btag = 0
         self.count =0
         self.acount =0
@@ -221,6 +228,9 @@ class BeautyArticleProcessor(HTMLParser):
         self.author = ''
         self.date = ''
         self.space = 0
+        self.contentTag=0
+        self.signTag=0
+        self.refTag=0
                 
     def handle_data(self,data):
         if self.btag==1:
@@ -246,7 +256,19 @@ class BeautyArticleProcessor(HTMLParser):
             if self.count == 5:
                  self.hasTag = 1
             if self.hasTag == 1:
-                self.content=self.content+data+'\n'
+                if data.startswith(u"【"):
+                    self.refTag=1
+                if data.startswith("--"):
+                    self.refTag=0
+                    self.signTag=1
+                if self.refTag==1:
+                    self.reference=self.reference+data+'\n'
+                elif self.signTag==1:
+                    if data.startswith(u"※"):
+                        return
+                    self.signature=self.signature+data+'\n'
+                else:
+                    self.content=self.content+data+'\n'
 #            else:
 #                self.content=self.content+data
 #        self.hasTag = 0
@@ -292,6 +314,8 @@ class BeautyArticleProcessor(HTMLParser):
 #        print self.content
         result['id'] = self.aid
         result['tid'] = self.topid
+        result['ref']=self.reference
+        result['sign']=self.signature
         return result
                             
     def show(self):
