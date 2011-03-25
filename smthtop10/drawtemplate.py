@@ -7,7 +7,6 @@ from  smthparser import BeautyArticleProcessor
 from smthparser import Top10Parser
 import pdb
 from django.template import Template, Context
-from django.shortcuts import render_to_response
 from django.conf import settings
 from models import *
 from bookTemplate import bookTemplate

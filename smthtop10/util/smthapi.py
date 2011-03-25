@@ -6,9 +6,9 @@ import urllib2
 import httplib
 import cookielib
 import socket
-#from django.conf import settings
+from django.conf import settings
 
-ckpath="./"
+ckpath=settings.CKPATH
 
 class SimpleSMTH:
     def __init__(self):

@@ -1,10 +1,9 @@
 import random
 import os
-#from django.conf import settings
+from django.conf import settings
 
-#ckpath=settings.COOKIE_PATH
+ckpath=settings.CKPATH
 
-ckpath="./"
 
 def gen_sid():
     code = "".join(random.sample([chr(i) for i in range(48,58)], 10))

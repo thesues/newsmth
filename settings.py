@@ -96,5 +96,5 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 )
 
-ckpath="./"
+CKPATH="/home/zhangdongmao/newsmth/smthtop10/ck/"
 SMTH_URL="http://www.newsmth.net/atomic.php"

@@ -19,13 +19,21 @@ import cPickle
 from url_pic_finder import find_url
 from datetime import date
 from down_image import down_image
+from bookTemplate import bookTemplate
+from django.template import Template, Context
+import os
 
 today=date.today()
 smthurl=settings.SMTH_URL
 smthorigurl="http://www.newsmth.net/bbscon.php"
-ckpath="./"
 userid="sea286"
 userpass="zhu8jie"
+archive="./archive/"+today.strftime("%Y%m%d")+"/"
+if os.path.isdir(archive):
+    pass
+else:
+    os.mkdir(archive)
+
 def getContent(smth,parser,board,articleid,feed,next):
     if next==0:
         out=smth.get_url_data(smthurl+"?act=article&board="+board+"&id="+articleid)
@@ -39,7 +47,7 @@ def getContent(smth,parser,board,articleid,feed,next):
             a=Post(author=result["a"],content=result["c"],signature=result["sign"],reference=result["ref"],attached=True)
             print find_url(origout)
             for imageurl in find_url(unicode(origout,"gbk")): 
-                a.imagefilenameList.append(down_image(smth,imageurl))
+                a.imagefilenameList.append(down_image(smth,imageurl,archive))
         feed.title=result['t']
         feed.append(a)
     elif next==1:
@@ -50,7 +58,7 @@ def getContent(smth,parser,board,articleid,feed,next):
         #print result["c"]
         a=Post(author=result["a"],content=result["c"],signature=result["sign"],reference=result["ref"],attached=False)
         feed.append(a)
-        if(feed.numOfPosts==5):
+        if(feed.numOfPosts==2):
             return
         #to be contented
         if result["id"]!=articleid:
@@ -82,7 +90,10 @@ for article in top10parser.getall():
     sumaryFeeds.append(feed)
 
 
-sumaryFeeds.append(feed)
-f=open("./testfeed","w")
-cPickle.dump(sumaryFeeds,f)
+t=Template(bookTemplate)
+c=Context({"sumaryFeeds":sumaryFeeds})
+renderdHtml=t.render(c)
+#write to html
+f=open(archive+"/sm.html","w")
+f.write(renderdHtml.encode("utf8"))
 f.close()
