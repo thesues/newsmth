@@ -8,6 +8,7 @@ class Post():
         self.attached=attached
         self.signature=signature
         self.reference=reference
+        self.imagefilenameList=[]
     def __str__(self):
         return "%s:\n%s" % (self.author.encode("utf8"),self.content.encode("utf8"))
         

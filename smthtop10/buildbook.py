@@ -16,8 +16,13 @@ from models import *
 from bookTemplate import bookTemplate
 from django.template import Template
 import cPickle 
+from url_pic_finder import find_url
+from datetime import date
+from down_image import down_image
 
+today=date.today()
 smthurl=settings.SMTH_URL
+smthorigurl="http://www.newsmth.net/bbscon.php"
 ckpath="./"
 userid="sea286"
 userpass="zhu8jie"
@@ -27,10 +32,14 @@ def getContent(smth,parser,board,articleid,feed,next):
         parser.reset()
         parser.feed(unicode(out,"gbk","ignore"))
         result=parser.getall()
-        #to be contented
-#        print result["c"]
-#        pdb.set_trace()
-        a=Post(author=result["a"],content=result["c"],signature=result["sign"],reference=result["ref"],attached=False)
+        if result["pic"]=="":
+            a=Post(author=result["a"],content=result["c"],signature=result["sign"],reference=result["ref"],attached=False)
+        else:
+            origout=smth.get_url_data("http://www.newsmth.net/"+result["pic"])
+            a=Post(author=result["a"],content=result["c"],signature=result["sign"],reference=result["ref"],attached=True)
+            print find_url(origout)
+            for imageurl in find_url(unicode(origout,"gbk")): 
+                a.imagefilenameList.append(down_image(smth,imageurl))
         feed.title=result['t']
         feed.append(a)
     elif next==1:
@@ -41,7 +50,7 @@ def getContent(smth,parser,board,articleid,feed,next):
         #print result["c"]
         a=Post(author=result["a"],content=result["c"],signature=result["sign"],reference=result["ref"],attached=False)
         feed.append(a)
-        if(feed.numOfPosts==50):
+        if(feed.numOfPosts==5):
             return
         #to be contented
         if result["id"]!=articleid:
@@ -55,66 +64,6 @@ def login(smth):
     else:
         print "login error"
 
-    def down_image(self, url, referer=None, filename=None):
-        """download image"""
-
-        print "download: %s" % url,
-        
-        url = escape.utf8(url)
-        image_guid = hashlib.sha1(url).hexdigest()
-
-        x = url.split('.')
-        ext = 'jpg'
-        if len(x) > 1:
-            ext = x[-1]
-
-            if len(ext) > 4:
-                ext = ext[0:3]
-
-            ext = re.sub('[^a-zA-Z]','', ext)
-            ext = ext.lower()
-
-            if ext not in ['jpg', 'jpeg', 'gif','png','bmp']:
-                ext = 'jpg'
-
-        y = url.split('/')
-        h = hashlib.sha1(str(y[2])).hexdigest()
-
-        hash_dir = os.path.join(h[0:1], h[1:2])
-        filename = image_guid + '.' + ext
-
-        img_dir  = os.path.join(self.work_dir, 'data', 'images', hash_dir)
-        fullname = os.path.join(img_dir, filename)
-        
-        localimage = 'images/%s/%s' % (hash_dir, filename)
-        if os.path.isfile(fullname) is False:
-            if not os.path.exists(img_dir):
-                os.makedirs( img_dir )
-            try:                
-                req = urllib2.Request(url)
-                req.add_header('User-Agent', self.user_agent)
-                req.add_header('Accept-Language', 'zh-cn,zh;q=0.7,nd;q=0.3')
-
-                if referer is not None:
-                    req.add_header('Referer', referer)
-
-                response = urllib2.urlopen(req)
-
-                localFile = open(fullname, 'wb')
-                localFile.write(response.read())
-
-                response.close()
-                localFile.close()
-                print "done."
-            except Exception, e:
-                print 'fail: %s' % e
-                localimage = False
-            finally:
-                localFile, response, req = None, None, None
-        else:
-            print "exists."
-        
-        return localimage
 
 
 smth = SimpleSMTH()
@@ -127,13 +76,13 @@ top10parser=Top10Parser(out)
 articleparser=BeautyArticleProcessor()
 for article in top10parser.getall():
     feed=Feed()
-    #pdb.set_trace()
     getContent(smth,articleparser,article['b'],article['gid'],feed,0)
     getContent(smth,articleparser,article['b'],article['gid'],feed,1)
     print feed.title
     sumaryFeeds.append(feed)
 
 
+sumaryFeeds.append(feed)
 f=open("./testfeed","w")
 cPickle.dump(sumaryFeeds,f)
 f.close()

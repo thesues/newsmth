@@ -52,18 +52,15 @@ bookTemplate = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.
     }
     #content{
         margin-top:10px;
-        page-break-after: always;
     }
     #ref
     {
         margin-top:10px;
-        page-break-after: always;
     }
     #signature
     {
         margin-top:10px;
         font-size: 50%;
-        page-break-after: always;
         background:#eee;
     }
     </style>
@@ -101,10 +98,14 @@ bookTemplate = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.
 <!--             <a href="#sectionlist_{{forloop.parentloop.counter}}">back to lz</a> -->
              <br />
              {{post.content|linebreaksbr}}
+             {%if post.attached %}
+             {%for im in post.imagefilenameList%}
+             <img src="{{im}}"/>
+             {%endfor%}
+             {%endif%}
           <div id="signature">
              {{post.signature|linebreaksbr}}
           </div>
-             ============================================
          </div>
 {%endfor%}
 </div>

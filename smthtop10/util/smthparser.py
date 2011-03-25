@@ -200,6 +200,7 @@ class BeautyArticleProcessor(HTMLParser):
         self.content = ""
         self.signature=""
         self.reference=""
+        self.picture=""
         self.btag = 0
         self.count =0
         self.acount =0
@@ -213,11 +214,13 @@ class BeautyArticleProcessor(HTMLParser):
         self.contentTag=0
         self.signTag=0
         self.refTag=0
+        self.pcount=0
     def reset(self):
         HTMLParser.reset(self)
         self.content = ""
         self.signature=""
         self.reference=""
+        self.picture=""
         self.btag = 0
         self.count =0
         self.acount =0
@@ -231,6 +234,7 @@ class BeautyArticleProcessor(HTMLParser):
         self.contentTag=0
         self.signTag=0
         self.refTag=0
+        self.pcount=0
                 
     def handle_data(self,data):
         if self.btag==1:
@@ -301,6 +305,13 @@ class BeautyArticleProcessor(HTMLParser):
                 print url
                 idpos = url.find('id=')
                 self.aid = url[idpos+3:len(url)-5]
+            #if has picure ,parse orig article 
+            if self.pcount==2:
+                href=[v for k,v in attrs if k=='href']
+                print href
+                self.picture=href[0]
+        if tag =='p':
+            self.pcount=self.pcount+1
 
     def getall(self):
         result = {}
@@ -316,6 +327,7 @@ class BeautyArticleProcessor(HTMLParser):
         result['tid'] = self.topid
         result['ref']=self.reference
         result['sign']=self.signature
+        result['pic']=self.picture
         return result
                             
     def show(self):
