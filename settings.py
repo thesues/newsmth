@@ -92,9 +92,15 @@ INSTALLED_APPS = (
     'smthtop10',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
+    'registration'
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
 
 CKPATH="/home/zhangdongmao/newsmth/smthtop10/ck/"
 SMTH_URL="http://www.newsmth.net/atomic.php"
+
+ACCOUNT_ACTIVATION_DAYS = 2
+EMAIL_HOST = 'localhost'
+DEFAULT_FROM_EMAIL = 'webmaster@localhost'
+LOGIN_REDIRECT_URL = '/smthtop10'

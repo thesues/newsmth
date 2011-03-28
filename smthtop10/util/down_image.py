@@ -12,6 +12,9 @@ def down_image(smth,url,archive):
     y=url.split("/")[2]
     filename=image_uid+'.'+'jpg'
     localimage='%s/images/%s' % (archive,filename)
+    if os.path.isfile(localimage):
+        print localimage+"existed"
+        return "images/"+filename
     if os.path.isdir(archive+"/images/") == False:
         os.mkdir(archive+"/images/")
     imageData=smth.get_url_data(url)
