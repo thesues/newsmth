@@ -95,7 +95,6 @@ bookTemplate = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.
  <h2 class="do_article_title">{{feed.title}}</h2>
 {%for post in feed.list%}
          <div class="article">
-<!--             <a href="#sectionlist_{{forloop.parentloop.counter}}">back to lz</a> -->
              <br />
              {{post.content|linebreaksbr}}
              {%if post.attached %}

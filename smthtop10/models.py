@@ -31,6 +31,7 @@ class UserProfile(models.Model):
     isPicIncluded=models.BooleanField()
     def __unicode__(self):
         return unicode(self.username)
+
 class Thread(models.Model):
     date=models.DateTimeField(auto_now_add=True)
     location=models.FilePathField(path=None)

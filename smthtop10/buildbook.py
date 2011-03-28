@@ -12,7 +12,7 @@ from django.template.context import RequestContext
 from django.template import loader, Context
 from django.shortcuts import render_to_response
 from django.conf import settings
-from models import *
+from smthtop10.models import *
 from bookTemplate import bookTemplate
 from django.template import Template
 import cPickle 
@@ -89,11 +89,18 @@ for article in top10parser.getall():
     print feed.title
     sumaryFeeds.append(feed)
 
+#write data
+f=open(archive="/sm.data")
+cPickle.dump(sumaryFeeds,f)
+f.close()
 
+#write to html
 t=Template(bookTemplate)
 c=Context({"sumaryFeeds":sumaryFeeds})
 renderdHtml=t.render(c)
-#write to html
 f=open(archive+"/sm.html","w")
 f.write(renderdHtml.encode("utf8"))
 f.close()
+#write to datebases
+p=Thread(date=today,location=archive+"/sm.html",mobiLocation=archive+"/sm.mobi")
+p.save()
