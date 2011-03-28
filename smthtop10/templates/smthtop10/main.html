@@ -1,0 +1,23 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh" lang="zh_CN">
+<meta name="Content-Type" content="text/html; charset=UTF-8" />
+<body>
+<title>kindle for newsmth top10</title>
+
+push smth top10 to your kindle
+
+
+<li>register</li>
+<li>login</li>
+<li>edit profile</li>
+<li>logout</li>
+<li>help</li>
+{%for thread in threads%}
+{{thread.date|date:"Y m d"}}
+<a href="{{thread.location}}">HTML</a>
+<a href="{{thread.mobiLocation}}">MOBI</a>
+{%endfor%}
+
+
+</body>
+  
+</html>
