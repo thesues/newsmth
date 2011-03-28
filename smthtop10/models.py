@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 class Post():
     def __init__(self,author="unknow",content="unknow",signature="unknown",reference="unknown",attached=False):
@@ -22,3 +22,17 @@ class Feed():
         self.numOfPosts=self.numOfPosts+1
     def __str__(self):
         return self.title.encode("utf8")
+
+class UserProfile(models.Model):
+    username=models.CharField(max_length=60)
+    kindlemail=models.EmailField(max_length=75)
+    user=models.ForeignKey(User,unique=True)
+    max_replies=models.IntegerField()
+    isPicIncluded=models.BooleanField()
+    def __unicode__(self):
+        return unicode(self.username)
+class Thread(models.Model):
+    date=models.DateTimeField(auto_now_add=True)
+    location=models.FilePathField(path=None)
+    mobiLocation=models.FilePathField(path=None)
+    
