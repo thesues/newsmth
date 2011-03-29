@@ -58,7 +58,7 @@ def getContent(smth,parser,board,articleid,feed,next):
         #print result["c"]
         a=Post(author=result["a"],content=result["c"],signature=result["sign"],reference=result["ref"],attached=False)
         feed.append(a)
-        if(feed.numOfPosts==60):
+        if(feed.numOfPosts==10):
             return
         #to be contented
         if result["id"]!=articleid:
@@ -90,7 +90,7 @@ for article in top10parser.getall():
     sumaryFeeds.append(feed)
 
 #write data
-f=open(archive="/sm.data")
+f=open(archive+"/sm.data","w")
 cPickle.dump(sumaryFeeds,f)
 f.close()
 
