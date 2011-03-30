@@ -18,11 +18,14 @@ def down_image(smth,url,archive):
     if os.path.isdir(archive+"/images/") == False:
         os.mkdir(archive+"/images/")
     imageData=smth.get_url_data(url)
-    im=Image.open(StringIO(imageData)).convert("L")
-    #resize
-    width,height=im.size
-    im2=im.resize((width/2,height/2),Image.ANTIALIAS)
-    im2.save(localimage)
+    try:
+        im=Image.open(StringIO(imageData)).convert("L")
+         #resize
+        width,height=im.size
+        im2=im.resize((width/2,height/2),Image.ANTIALIAS)
+        im2.save(localimage)
+    except:
+        pass
     return "images/"+filename
     
 if __name__=="__main__":
