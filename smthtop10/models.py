@@ -28,9 +28,8 @@ class Feed():
 class UserProfile(models.Model):
     kindlemail=models.EmailField(max_length=75)
     user=models.ForeignKey(User,unique=True)
-    max_replies=models.IntegerField()
     def __unicode__(self):
-        return unicode(self.username)
+        return unicode(self.user.username)
 
 class Thread(models.Model):
     date=models.DateTimeField(auto_now_add=True)
