@@ -102,5 +102,5 @@ SMTH_URL="http://www.newsmth.net/atomic.php"
 
 ACCOUNT_ACTIVATION_DAYS = 2
 EMAIL_HOST = 'localhost'
-DEFAULT_FROM_EMAIL = 'webmaster@localhost'
+DEFAULT_FROM_EMAIL = 'admin@pushkindle.com'
 LOGIN_REDIRECT_URL = '/smthtop10'
