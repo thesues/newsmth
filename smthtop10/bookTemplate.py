@@ -56,6 +56,7 @@ bookTemplate = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.
     #ref
     {
         margin-top:10px;
+        background:#eee;
     }
     #signature
     {
@@ -102,6 +103,9 @@ bookTemplate = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.
              <img src="{{im}}"/>
              {%endfor%}
              {%endif%}
+	   <div id="ref">
+	    {{post.reference||linebreaksbr}}
+	   </div>	 
           <div id="signature">
              {{post.signature|linebreaksbr}}
           </div>
