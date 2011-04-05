@@ -104,7 +104,7 @@ bookTemplate = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.
              {%endfor%}
              {%endif%}
 	   <div id="ref">
-	    {{post.reference||linebreaksbr}}
+	    {{post.reference|linebreaksbr}}
 	   </div>	 
           <div id="signature">
              {{post.signature|linebreaksbr}}
