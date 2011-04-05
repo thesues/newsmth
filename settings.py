@@ -11,12 +11,12 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/home/zhangdongmao/newsmth/smthtop10/sqlite.db',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'django',                      # Or path to database file if using sqlite3.
+        'USER': 'django',                      # Not used with sqlite3.
+        'PASSWORD': 'django',                  # Not used with sqlite3.
+        'HOST': '127.0.0.1',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
 
@@ -101,7 +101,12 @@ CKPATH="/home/zhangdongmao/newsmth/smthtop10/ck/"
 SMTH_URL="http://www.newsmth.net/atomic.php"
 
 ACCOUNT_ACTIVATION_DAYS = 2
+<<<<<<< HEAD
 #DEFAULT_FROM_EMAIL = 'webmaster@localhost'
+=======
+EMAIL_HOST = 'localhost'
+DEFAULT_FROM_EMAIL = 'admin@pushkindle.com'
+>>>>>>> 98520ee0438aa2b469f9b168bdb479b64f93f0df
 LOGIN_REDIRECT_URL = '/smthtop10'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
