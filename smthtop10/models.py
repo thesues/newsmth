@@ -25,7 +25,7 @@ class Feed():
     def __str__(self):
         return self.title.encode("utf8")
 
-class UserProfile(models.Model):
+class UserProfile(models.Model): 
     kindlemail=models.EmailField(max_length=75)
     user=models.ForeignKey(User,unique=True)
     def __unicode__(self):

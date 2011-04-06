@@ -13,6 +13,7 @@ class ProfileForm(forms.ModelForm):
         model=UserProfile
 def user_created(sender, user, request, **kwargs):
     form = UserRegsiterForm(request.POST)
+    pdb.set_trace()
     profile=UserProfile(user=user)
     profile.kindlemail=form.data['kindlemail']
     profile.save()

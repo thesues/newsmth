@@ -92,7 +92,7 @@ INSTALLED_APPS = (
     'smthtop10',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
-#    'registration'
+    'registration'
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
