@@ -7,6 +7,10 @@ import pdb
 #this is for registration
 class UserRegsiterForm(RegistrationForm):
     kindlemail=forms.EmailField()
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model=UserProfile
 def user_created(sender, user, request, **kwargs):
     form = UserRegsiterForm(request.POST)
     profile=UserProfile(user=user)
