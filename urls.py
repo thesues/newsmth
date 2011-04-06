@@ -2,7 +2,8 @@ from django.conf.urls.defaults import *
 from django.conf import settings
 from django.contrib.auth.views import login, logout
 from registration.views import register
-from smthtop10.forms import UserRegsiterForm
+from smthtop10.forms import *
+import smthtop10.regbackend
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -17,6 +18,6 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
     (r'^smthtop10/',include('smthtop10.urls')),
-    (r'^accounts/register$',register,{'form_class': UserRegsiterForm,'backend': 'registration.backends.default.DefaultBackend'}),
+    (r'^accounts/register/$',register,{'form_class': UserRegsiterForm,'backend': 'registration.backends.default.DefaultBackend'}),
     (r'^accounts/', include('registration.backends.default.urls')),
 )

@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render_to_response
 from smthtop10.models import *
-from smthtop10.forms import *
+from smthtop10.forms import UserRegsiterForm
 from django.core.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 
