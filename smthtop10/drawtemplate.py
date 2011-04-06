@@ -8,12 +8,12 @@ from smthparser import Top10Parser
 import pdb
 from django.template import Template, Context
 from django.conf import settings
-from models import *
 from bookTemplate import bookTemplate
 import cPickle
- 
-
-f=open("./testfeed","r")
+import re
+def deleteblankline(txt):
+    return re.sub(r'^\s*\n', '', txt) 
+f=open("/home/zhangdongmao/newsmth/smthtop10/archive/20110406/sm.data","r")
 sumaryFeeds=cPickle.load(f)
 f.close()
 t=Template(bookTemplate)

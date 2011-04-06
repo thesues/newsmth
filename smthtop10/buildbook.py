@@ -58,7 +58,7 @@ def getContent(smth,parser,board,articleid,feed,next):
         #print result["c"]
         a=Post(author=result["a"],content=result["c"],signature=result["sign"],reference=result["ref"],attached=False)
         feed.append(a)
-        if(feed.numOfPosts==10):
+        if(feed.numOfPosts==20):
             return
         #to be contented
         if result["id"]!=articleid:

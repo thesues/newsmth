@@ -103,13 +103,13 @@ bookTemplate = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.
              <img src="{{im}}"/>
              {%endfor%}
              {%endif%}
-	   {%if forloop.counter=1 %}
+	   {%if forloop.counter == 1 %}
 	   <div id="ref">
 	    {{post.reference|linebreaksbr}}
 	   </div>	 
 	  {%endif%}
           <div id="signature">
-             {{post.signature|linebreaksbr}}
+             {{post.signature|truncatewords:50|linebreaksbr}}
           </div>
          </div>
 {%endfor%}
