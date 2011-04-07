@@ -32,7 +32,10 @@ class UserProfile(models.Model):
         return unicode(self.user.username)
 
 class Thread(models.Model):
-    date=models.DateTimeField(auto_now_add=True)
+    date=models.DateField(auto_now_add=True)
     location=models.FilePathField(path=None)
     mobiLocation=models.FilePathField(path=None)
+
+
+
 

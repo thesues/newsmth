@@ -63,14 +63,18 @@ def getContent(smth,parser,board,articleid,feed,next):
         #to be contented
         if result["id"]!=articleid:
             getContent(smth,parser,board,result["id"],feed,1)
-
+tries=0
 def login(smth):
+    global tries
     r=smth.smthLogin(userid,userpass)
     if r==0:
         key=context.gen_sid()
         smth.saveCj(key)
     else:
         print "login error"
+        tries=tries+1
+        if tries < 3:
+            login(smth)
 
 
 

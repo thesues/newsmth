@@ -2,11 +2,22 @@ import sys
 sys.path.append("util")
 sys.path.append("../..")
 sys.path.append("..")
+import os
 from django.core.mail import *
 from smthtop10.models import UserProfile
+from datetime import date
+today=date.today()
+archive="./archive/"+today.strftime("%Y%m%d")+"/"
+
+#gernarater mobi files
+mobifile=archive+"sm.mobi"
+htmlfile=archive+"sm.html"
+kindlegen="./kindlegen"
+ret=os.system(kindlegen+" "+htmlfile)
 t=EmailMessage()
 for i in UserProfile.objects.all():
     t.to.append(i.kindlemail)
-t.attach_file("/home/zhangdongmao/newsmth/smthtop10/archive/20110405/sm.mobi")
+t.attach_file(mobifile)
 t.send()
+
 
