@@ -13,11 +13,13 @@ archive="./archive/"+today.strftime("%Y%m%d")+"/"
 mobifile=archive+"sm.mobi"
 htmlfile=archive+"sm.html"
 kindlegen="./kindlegen"
-ret=os.system(kindlegen+" "+htmlfile)
-t=EmailMessage()
-for i in UserProfile.objects.all():
-    t.to.append(i.kindlemail)
-t.attach_file(mobifile)
-t.send()
+os.system(kindlegen+" "+htmlfile)
+print mobifile
+if os.path.isfile(mobifile):
+    t=EmailMessage()
+    for i in UserProfile.objects.all():
+        t.to.append(i.kindlemail)
+    t.attach_file(mobifile)
+    t.send()
 
 
