@@ -17,7 +17,7 @@ from bookTemplate import bookTemplate
 from django.template import Template
 import cPickle 
 from url_pic_finder import find_url
-from datetime import date
+from datetime import date,datetime
 from down_image import down_image
 from bookTemplate import bookTemplate
 from django.template import Template, Context
@@ -90,7 +90,6 @@ for article in top10parser.getall():
     feed=Feed()
     getContent(smth,articleparser,article['b'],article['gid'],feed,0)
     getContent(smth,articleparser,article['b'],article['gid'],feed,1)
-    print feed.title
     sumaryFeeds.append(feed)
 
 #write data
@@ -100,11 +99,33 @@ f.close()
 
 #write to html
 t=Template(bookTemplate)
-c=Context({"sumaryFeeds":sumaryFeeds})
+c=Context({"sumaryFeeds":sumaryFeeds,"today":today})
 renderdHtml=t.render(c)
 f=open(archive+"/sm.html","w")
 f.write(renderdHtml.encode("utf8"))
 f.close()
+
 #write to datebases
-p=Thread(date=today,location=archive+"/sm.html",mobiLocation=archive+"/sm.mobi")
-p.save()
+previousThread=Thread.objects.filter(date=today)
+if len(previousThread)==0:
+    p=Thread.objects.create(location=archive+"sm.html",mobiLocation=archive+"sm.mobi")
+    p.save()
+else:
+    p=previousThread[0]
+    p.lastUpdate=datetime.now()
+    p.save()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

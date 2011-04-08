@@ -35,6 +35,14 @@ class Thread(models.Model):
     date=models.DateField(auto_now_add=True)
     location=models.FilePathField(path=None)
     mobiLocation=models.FilePathField(path=None)
+    lastUpdate=models.DateTimeField(auto_now_add=True)
+
+
+
+
+
+
+
 
 
 

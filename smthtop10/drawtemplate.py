@@ -11,11 +11,15 @@ from django.conf import settings
 from bookTemplate import bookTemplate
 import cPickle
 import re
-def deleteblankline(txt):
-    return re.sub(r'^\s*\n', '', txt) 
-f=open("/home/zhangdongmao/newsmth/smthtop10/archive/20110406/sm.data","r")
+from datetime import date
+
+today=date.today()
+
+dataarchive="./archive/"+today.strftime("%Y%m%d")+"/sm.data"
+f=open(dataarchive,"r")
 sumaryFeeds=cPickle.load(f)
 f.close()
+
 t=Template(bookTemplate)
 c=Context({"sumaryFeeds":sumaryFeeds})
 renderdHtml=t.render(c)
