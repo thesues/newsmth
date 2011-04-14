@@ -21,5 +21,3 @@ if os.path.isfile(mobifile):
         t.to.append(i.kindlemail)
     t.attach_file(mobifile)
     t.send()
-
-

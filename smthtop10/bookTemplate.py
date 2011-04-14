@@ -3,7 +3,7 @@ bookTemplate = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
-    <title>水木十大热点话题</title>
+    <title>水木十大热点话题 {{today|date:"Y/m/d"}}</title>
     <style type="text/css">
     body{
         font-size: 1.1em;

@@ -15,6 +15,7 @@ from django.core.urlresolvers import reverse
 def main(request):
     threads=Thread.objects.all()
     return render_to_response("smthtop10/main.html",add_csrf(request,threads=threads))
+    
 
 @login_required
 def profile(request,pk):
