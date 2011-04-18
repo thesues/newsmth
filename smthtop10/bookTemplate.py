@@ -5,10 +5,13 @@ bookTemplate = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
     <title>水木十大热点话题 {{today|date:"Y/m/d"}}</title>
     <style type="text/css">
+    body,#content,p,.article{
+        margin:0;
+        padding:0;
+    }
     body{
         font-size: 1.1em;
-        margin:0 5px;
-
+        margin:0 0 0 5px;
     }
 
     h1{
@@ -61,8 +64,13 @@ bookTemplate = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.
     #signature
     {
         margin-top:10px;
-        font-size: 50%;
+        font-size: 50%; 
         background:#eee;
+    }
+    .article
+    {
+       margin-left:-5px
+     
     }
     </style>
 </head>

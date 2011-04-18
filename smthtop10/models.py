@@ -36,11 +36,9 @@ class Thread(models.Model):
     location=models.FilePathField(path=None)
     mobiLocation=models.FilePathField(path=None)
     lastUpdate=models.DateTimeField(auto_now_add=True)
-
-
-
-
-
+class UniqueFeed(models.Model):
+    date=models.DateField(auto_now_add=True)
+    title=models.CharField(max_length=40)
 
 
 

@@ -58,7 +58,7 @@ def getContent(smth,parser,board,articleid,feed,next):
         #print result["c"]
         a=Post(author=result["a"],content=result["c"],signature=result["sign"],reference=result["ref"],attached=False)
         feed.append(a)
-        if(feed.numOfPosts==20):
+        if(feed.numOfPosts==2):
             return
         #to be contented
         if result["id"]!=articleid:
@@ -79,21 +79,35 @@ def login(smth):
 
 
 smth = SimpleSMTH()
-sumaryFeeds=[]
+#sumaryFeeds=[]
 feed=Feed()
 login(smth)
 #get top10 topics
 out=smth.get_url_data("http://www.newsmth.net/rssi.php?h=1")
+
+previousFeed=UniqueFeed.objects.filter(data=today)
+
 top10parser=Top10Parser(out)
 articleparser=BeautyArticleProcessor()
+#read data from disk
+try:
+    f=open(archive+"/sm.data","rw")
+    sumaryFeeds=cPickle.load(f)
+except IOError:
+    sumaryFeeds=[]
+    pass
+
 for article in top10parser.getall():
+    if article['t'] in previousFeed.title:
+        continue
+    temp=previousFeed.objects.create(title=article['t'])
+    temp.save()
     feed=Feed()
     getContent(smth,articleparser,article['b'],article['gid'],feed,0)
     getContent(smth,articleparser,article['b'],article['gid'],feed,1)
     sumaryFeeds.append(feed)
 
 #write data
-f=open(archive+"/sm.data","w")
 cPickle.dump(sumaryFeeds,f)
 f.close()
 
@@ -105,6 +119,10 @@ f=open(archive+"/sm.html","w")
 f.write(renderdHtml.encode("utf8"))
 f.close()
 
+#uniq the feed
+
+
+
 #write to datebases
 previousThread=Thread.objects.filter(date=today)
 if len(previousThread)==0:
@@ -114,15 +132,6 @@ else:
     p=previousThread[0]
     p.lastUpdate=datetime.now()
     p.save()
-
-
-
-
-
-
-
-
-
 
 
 
