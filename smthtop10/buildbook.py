@@ -85,14 +85,15 @@ login(smth)
 #get top10 topics
 out=smth.get_url_data("http://www.newsmth.net/rssi.php?h=1")
 
-previousFeedTitle=[e.title for e in UniqueFeed.objects.filter(data=today)]
+previousFeedTitle=[e.title for e in UniqueFeed.objects.filter(date=today)]
 
 top10parser=Top10Parser(out)
 articleparser=BeautyArticleProcessor()
 #read data from disk
 try:
-    f=open(archive+"/sm.data","rw")
+    f=open(archive+"/sm.data","r")
     sumaryFeeds=cPickle.load(f)
+    f.close()
 except IOError:
     sumaryFeeds=[]
     pass
@@ -100,7 +101,7 @@ except IOError:
 for article in top10parser.getall():
     if article['t'] in previousFeedTitle:
         continue
-    temp=previousFeed.objects.create(title=article['t'])
+    temp=UniqueFeed.objects.create(title=article['t'])
     temp.save()
     feed=Feed()
     getContent(smth,articleparser,article['b'],article['gid'],feed,0)
@@ -108,6 +109,8 @@ for article in top10parser.getall():
     sumaryFeeds.append(feed)
 
 #write data
+
+f=open(archive+"/sm.data","w")
 cPickle.dump(sumaryFeeds,f)
 f.close()
 
