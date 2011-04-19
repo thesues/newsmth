@@ -85,7 +85,7 @@ login(smth)
 #get top10 topics
 out=smth.get_url_data("http://www.newsmth.net/rssi.php?h=1")
 
-previousFeed=UniqueFeed.objects.filter(data=today)
+previousFeedTitle=[e.title for e in UniqueFeed.objects.filter(data=today)]
 
 top10parser=Top10Parser(out)
 articleparser=BeautyArticleProcessor()
@@ -98,7 +98,7 @@ except IOError:
     pass
 
 for article in top10parser.getall():
-    if article['t'] in previousFeed.title:
+    if article['t'] in previousFeedTitle:
         continue
     temp=previousFeed.objects.create(title=article['t'])
     temp.save()
