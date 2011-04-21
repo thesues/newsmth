@@ -48,7 +48,6 @@ def getContent(smth,parser,board,articleid,feed,next):
             print find_url(origout)
             for imageurl in find_url(unicode(origout,"gbk")): 
                 a.imagefilenameList.append(down_image(smth,imageurl,archive))
-        feed.title=result['t']
         feed.append(a)
     elif next==1:
         out=smth.get_url_data(smthurl+"?act=article&board="+board+"&id="+articleid+"&p=tn")
@@ -58,7 +57,7 @@ def getContent(smth,parser,board,articleid,feed,next):
         #print result["c"]
         a=Post(author=result["a"],content=result["c"],signature=result["sign"],reference=result["ref"],attached=False)
         feed.append(a)
-        if(feed.numOfPosts==2):
+        if(feed.numOfPosts==20):
             return
         #to be contented
         if result["id"]!=articleid:
@@ -85,7 +84,6 @@ login(smth)
 #get top10 topics
 out=smth.get_url_data("http://www.newsmth.net/rssi.php?h=1")
 
-previousFeedTitle=[e.title for e in UniqueFeed.objects.filter(date=today)]
 
 top10parser=Top10Parser(out)
 articleparser=BeautyArticleProcessor()
@@ -93,17 +91,19 @@ articleparser=BeautyArticleProcessor()
 try:
     f=open(archive+"/sm.data","r")
     sumaryFeeds=cPickle.load(f)
+    print "SumaryFeeds exist"
     f.close()
 except IOError:
     sumaryFeeds=[]
     pass
 
+previousFeedTitle=[e.title for e in sumaryFeeds]
+
 for article in top10parser.getall():
-    if article['t'] in previousFeedTitle:
+    if article['t']=='' or article['t'] in previousFeedTitle:
         continue
-    temp=UniqueFeed.objects.create(title=article['t'])
-    temp.save()
     feed=Feed()
+    feed.title=article['t']
     getContent(smth,articleparser,article['b'],article['gid'],feed,0)
     getContent(smth,articleparser,article['b'],article['gid'],feed,1)
     sumaryFeeds.append(feed)
@@ -135,9 +135,4 @@ else:
     p=previousThread[0]
     p.lastUpdate=datetime.now()
     p.save()
-
-
-
-
-
 
