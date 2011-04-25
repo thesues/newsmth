@@ -19,7 +19,7 @@ os.system(kindlegen+" "+htmlfile)
 print mobifile
 if os.path.isfile(mobifile):
     t=EmailMessage()
-    for i in UserProfile.objects.filter(updateTime__iexact=hour)
+    for i in UserProfile.objects.filter(updateTime__iexact=hour):
         t.to.append(i.kindlemail)
     t.attach_file(mobifile)
     t.send()
