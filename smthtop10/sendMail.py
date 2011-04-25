@@ -6,7 +6,9 @@ import os
 from django.core.mail import *
 from smthtop10.models import UserProfile
 from datetime import date
+from datetime import datetime
 today=date.today()
+hour=datetime.now().hour
 archive="./archive/"+today.strftime("%Y%m%d")+"/"
 
 #gernarater mobi files
@@ -17,7 +19,8 @@ os.system(kindlegen+" "+htmlfile)
 print mobifile
 if os.path.isfile(mobifile):
     t=EmailMessage()
-    for i in UserProfile.objects.all():
+    for i in UserProfile.objects.filter(updateTime__iexact=hour)
         t.to.append(i.kindlemail)
     t.attach_file(mobifile)
     t.send()
+

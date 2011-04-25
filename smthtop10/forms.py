@@ -3,9 +3,11 @@ from models import *
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
+
 #this is for registration
 class UserRegsiterForm(RegistrationFormUniqueEmail):
     kindlemail=forms.EmailField()
+    updatetime=forms.ChoiceField(choices=UPDATE_TIME)
     def clean_kindlemail(self):
         if UserProfile.objects.filter(kindlemail=self.cleaned_data['kindlemail']):
             raise forms.ValidationError("This email address is already in use. Please supply a different email address.")
@@ -15,4 +17,5 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model=UserProfile
         exclude=["user"]
-        
+
+
