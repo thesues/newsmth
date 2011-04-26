@@ -13,7 +13,7 @@ class Post():
         self.imagefilenameList=[]
     def __str__(self):
         return "%s:\n%s" % (self.author.encode("utf8"),self.content.encode("utf8"))
-        
+      
 class Feed():
     def __init__(self,title="unknown"):
         self.list=list()
@@ -25,9 +25,15 @@ class Feed():
     def __str__(self):
         return self.title.encode("utf8")
 
-class UserProfile(models.Model): 
+UPDATE_TIME=(
+        (7,"7:00 AM"),
+        (13,"13:00 AM"),
+        (19,"19:00 AM")
+        )
+class UserProfile(models.Model):
     kindlemail=models.EmailField(max_length=75)
     user=models.ForeignKey(User,unique=True)
+    updateTime=models.IntegerField(choices=UPDATE_TIME)
     def __unicode__(self):
         return unicode(self.user.username)
 
