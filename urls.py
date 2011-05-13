@@ -21,3 +21,8 @@ urlpatterns = patterns('',
     (r'^accounts/register/$',register,{'form_class': UserRegsiterForm,'backend': 'registration.backends.default.DefaultBackend'}),
     (r'^accounts/', include('registration.backends.default.urls')),
 )
+
+urlpatterns+=patterns("",
+		(r"^media/(?P<path>.*)$","django.views.static.serve",{'document_root':settings.MEDIA_ROOT}),)
+
+

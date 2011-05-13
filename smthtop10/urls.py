@@ -16,21 +16,3 @@ urlpatterns= patterns("smthtop10.views",
 
 #urlpatterns+=patterns("",
 #(r"^archive/(?P<path>.*)$","django.views.static.serve",{'document_root':settings.MEDIA_ROOT}),)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

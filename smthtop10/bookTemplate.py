@@ -35,7 +35,6 @@ bookTemplate = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.
         cursor: pointer
     }
     p{
-        text-indent:1.5em;
         line-height:1.3em;
         margin-top:0;
         margin-bottom:0;
@@ -69,7 +68,8 @@ bookTemplate = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.
     }
     .article
     {
-       margin-left:-5px
+       margin-left:0em
+	   margin-right:0em
      
     }
     </style>

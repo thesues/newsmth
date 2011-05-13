@@ -1,0 +1,38 @@
+﻿body,div,a,img,p,form,h1,h2,h3,h4,h5,h6,input,textarea,ul,li,dt,dt,dl {
+				margin:0;padding:0;
+}
+
+html {
+     background-color: #EDEDED;
+}
+body{
+				width:950px;
+				margin:5px auto;
+}
+#header,#content,#footer{
+				width:950px;
+				margin:0 auto;
+}
+#seperator{
+				width:950px;
+				height:2px;
+				background-color:#000000;
+				margin:3px 0;
+}
+
+#register {
+    float: right;
+    margin-top: 20px;
+    font-size: 18px;
+    text-align: right;
+}
+
+#register a { text-decoration: underline; }
+
+a { color: #00c; text-decoration: none; }
+a:visited { color: #00c; }
+a:hover { text-decoration: underline; }
+
+#pushtext{
+				margin-top:20px;
+}
