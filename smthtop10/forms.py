@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 #this is for registration
 class UserRegsiterForm(RegistrationFormUniqueEmail):
     kindlemail=forms.EmailField(label=_("kindlemail"))
-    updatetime=forms.ChoiceField(choices=UPDATE_TIME,label=_("updatetime"))
+    updateTime=forms.ChoiceField(choices=UPDATE_TIME,label=_("update time"))
     def clean_kindlemail(self):
         if UserProfile.objects.filter(kindlemail=self.cleaned_data['kindlemail']):
             raise forms.ValidationError(_("This email address is already in use. Please supply a different email address."))
