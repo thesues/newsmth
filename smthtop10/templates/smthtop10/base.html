@@ -14,17 +14,17 @@
 <div id="register">
 {%if user.is_authenticated %}
 hello {{user.username}}    
-<a href="{%url django.contrib.auth.views.logout%}?next={%url smthtop10_main%}">注销</a>
+<a href="{%url django.contrib.auth.views.logout%}?next={%url smthtop10_main%}">logout</a>
 &nbsp;<span style="color: #ccc;">&bull;</span>&nbsp;
-<a href="{%url smthtop10.views.profile user.pk%}">用户信息</a>
+<a href="{%url smthtop10.views.profile user.pk%}">profile</a>
 {%endif%}
 {%if not user.is_authenticated %}         
-<a href="{%url django.contrib.auth.views.login%}?next={%url smthtop10_main %}">登录</a> 
+<a href="{%url django.contrib.auth.views.login%}?next={%url smthtop10_main %}">login</a> 
 &nbsp;<span style="color: #ccc;">&bull;</span>&nbsp;
-<a href="{%url registration_register%}">注册</a>                 
+<a href="{%url registration_register%}">registration</a>                 
 {%endif%}
 &nbsp;<span style="color: #ccc;">&bull;</span>&nbsp;
-<a href="{%url smthtop10_help%}">帮助</a>                 
+<a href="{%url smthtop10_help%}">help</a>                 
 </div>
 
 <h1 id="logo"><a href="{%url smthtop10_main %}">newsmth top10 for kindle</a></h1>
@@ -47,7 +47,12 @@ hello {{user.username}}
 {%endblock%}
 </div>
 
+
+
 <div id="footer">
+<a href="mailto:deanraccoon@gmail.com">contact me</a>
+&nbsp;
+<a href="https://github.com/thesues/newsmth">open source</a>
 </div>
 </body>
 </html>

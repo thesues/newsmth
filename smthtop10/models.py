@@ -26,9 +26,9 @@ class Feed():
         return self.title.encode("utf8")
 
 UPDATE_TIME=(
-        (7,"7:00 AM"),
-        (13,"13:00 AM"),
-        (19,"19:00 AM")
+        (7,"7:00"),
+        (13,"13:00"),
+        (19,"19:00")
         )
 class UserProfile(models.Model):
     kindlemail=models.EmailField(max_length=75)
