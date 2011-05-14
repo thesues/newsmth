@@ -27,8 +27,7 @@ hello {{user.username}}
 <a href="{%url smthtop10_help%}">help</a>                 
 </div>
 
-<h1 id="logo"><a href="{%url smthtop10_main %}">newsmth top10 for kindle</a></h1>
-<div id="seperator"></div>
+<h1 id="logo"><a href="{%url smthtop10_main %}">Newsmth top10 for kindle</a></h1>
 <div style="font-size: 16px; margin-top: 8px;">Push newsmth bbs top10 topics to your kindle.</div>
 </div>
 {%endblock%}
@@ -39,10 +38,15 @@ hello {{user.username}}
 <div id="pushtext">
 {%for thread in threads%}
 {{thread.date|date:"Y m d"}}
-<a href="/media/{{thread.location}}">HTML</a>
-<a href="/media/{{thread.mobiLocation}}">MOBI</a>
+<a class="actionButton textButton" href="/media/{{thread.location}}">HTML</a>
+<a class="actionButton textButton" href="/media/{{thread.mobiLocation}}">MOBI</a>
 <br />
 {%endfor%}
+</div>
+<div id="rightbar">
+<h2 class="section_header">
+
+</h2>
 </div>
 {%endblock%}
 </div>
