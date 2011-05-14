@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
-from smthtop10.views import main,profile,help
+from smthtop10.views import *
 
 urlpatterns= patterns("smthtop10.views",
                       url(r"^$",
@@ -11,7 +11,10 @@ urlpatterns= patterns("smthtop10.views",
                           name="smthtop10_profile"),
                       url(r"^help/$",
                           help,
-                          name="smthtop10_help")
+                          name="smthtop10_help"),
+                      url(r"^delete/(\d+)/$",
+                          deleteUser,
+                          name="smthtop10_delete")
 )
 
 #urlpatterns+=patterns("",

@@ -29,7 +29,17 @@ def profile(request,pk):
     else:
         pf=ProfileForm(instance=profile)
     return render_to_response("smthtop10/profile.html",add_csrf(request,pf=pf))
-   
+
+@login_required
+def deleteUser(request,pk):
+    try:
+        user=User.objects.get(pk=pk)
+        user.delete()
+        return HttpResponseRedirect(reverse("smthtop10.views.main"));
+    except NameError:
+        return render_to_response("smthtop10/error.html",error="user not exist")
+        
+
 def add_csrf(request,**kwargs):
     d=dict(user=request.user,**kwargs)
     d.update(csrf(request))
