@@ -10,10 +10,27 @@ from smthtop10.forms import *
 from django.core.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
+
+def mk_paginator(request, items, num_items):
+    """Create and return a paginator."""
+    paginator = Paginator(items, num_items)
+    try: 
+        page = int(request.GET.get("page", '1'))
+    # If page is not an integer, deliver first page
+    except ValueError: 
+        page = 1
+    try:
+        items = paginator.page(page)
+    # If page is out of range (e.g. 9999), deliver last page of results.
+    except (InvalidPage, EmptyPage):
+        items = paginator.page(paginator.num_pages)
+    return items
 
 def main(request):
-    threads=Thread.objects.all()
+    threads=Thread.objects.order_by('-date')
+    threads=mk_paginator(request,threads,10);
     return render_to_response("smthtop10/main.html",add_csrf(request,threads=threads))
     
 

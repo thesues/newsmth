@@ -82,3 +82,4 @@ h1#logo { font-size: 40px; font-weight: normal; margin: 0; }
     font-size: 14px;
     border-bottom: 1px solid #ccc;
 }
+.pagination { margin-top: 20px; margin-left: -20px; }

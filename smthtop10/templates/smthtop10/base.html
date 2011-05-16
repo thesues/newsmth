@@ -36,12 +36,30 @@ hello {{user.username}}
 <div id="content">
 {%block content %}
 <div id="pushtext">
-{%for thread in threads%}
+{%for thread in threads.object_list%}
 {{thread.date|date:"Y m d"}}
 <a class="actionButton textButton" href="/media/{{thread.location}}">HTML</a>
 <a class="actionButton textButton" href="/media/{{thread.mobiLocation}}">MOBI</a>
 <br />
 {%endfor%}
+        <!-- Next/Prev page links  -->
+        {% if threads.object_list and threads.paginator.num_pages > 1 %}
+        <div class="pagination">
+            <span class="step-links">
+                {% if threads.has_previous %}
+                    <a href= "?page={{ threads.previous_page_number }}">previous &lt;&lt; </a>
+                {% endif %}
+
+                <span class="current">
+                    &nbsp;Page {{ threads.number }} of {{ threads.paginator.num_pages }}
+                </span>
+
+                {% if threads.has_next %}
+                    <a href="?page={{ threads.next_page_number }}"> &gt;&gt; next</a>
+                {% endif %}
+            </span>
+        </div>
+        {% endif %}
 </div>
 <div id="rightbar">
 <h2 class="section_header">
