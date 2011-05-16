@@ -17,6 +17,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
+    (r'^$','smthtop10.views.main'),
     (r'^smthtop10/',include('smthtop10.urls')),
     (r'^accounts/register/$',register,{'form_class': UserRegsiterForm,'backend': 'registration.backends.default.DefaultBackend'}),
     (r'^accounts/', include('registration.backends.default.urls')),
