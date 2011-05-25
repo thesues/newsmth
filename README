@@ -1,2 +1,5 @@
 fetch http://www.newsmth.org top10 and some replies every day
 and send mobi files to web users
+
+水木的十大的rss只有标题，每次用kindle看水木的十大的时候，都看不到回复， 用django建立一个网站，支持用户注册每天接收水木十大。会根据用户的需求 推送十大到注册用户的kindle上
+计划上可以推送更多的东西，如果有的网站的rss不是全文的，可以自己写html的parser解析出自己需要的东西， 进一步的计划是去parser糗事百科的html，因为糗事百科的rss只有top10，没有每日逐条的。

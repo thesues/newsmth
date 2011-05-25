@@ -33,7 +33,7 @@ UPDATE_TIME=(
 class UserProfile(models.Model):
     kindlemail=models.EmailField(max_length=75)
     user=models.ForeignKey(User,unique=True)
-    updateTime=models.IntegerField(choices=UPDATE_TIME)
+    updateTime=models.IntegerField(choices=UPDATE_TIME,default=0)
     def __unicode__(self):
         return unicode(self.user.username)
 

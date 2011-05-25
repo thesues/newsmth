@@ -19,8 +19,9 @@ def down_image(smth,url,archive):
         os.mkdir(archive+"/images/")
     imageData=smth.get_url_data(url)
     try:
-        im=Image.open(StringIO(imageData)).convert("L")
-         #resize
+        #im=Image.open(StringIO(imageData)).convert("L")
+        im=Image.open(StringIO(imageData))
+        #resize
         width,height=im.size
         im2=im.resize((width/2,height/2),Image.ANTIALIAS)
         im2.save(localimage)
