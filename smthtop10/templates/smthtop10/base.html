@@ -6,7 +6,7 @@
 <title>newsmth top10 for kindle</title>
 <link href="/media/css/kindle.css" rel="stylesheet" type="text/css"/>
 </head>
-
+{% load i18n %}
 <body>
 <div id="header">
 {%block header%}
@@ -27,8 +27,7 @@ hello {{user.username}}
 <a href="{%url smthtop10_help%}">help</a>                 
 </div>
 
-<h1 id="logo"><a href="{%url smthtop10_main %}">Newsmth top10 for kindle</a></h1>
-<div style="font-size: 16px; margin-top: 8px;">Push newsmth bbs top10 topics to your kindle.</div>
+<h1 id="logo"><a href="{%url smthtop10_main %}">{% trans 'Newsmth top10 for kindle' %}</a></h1>
 </div>
 {%endblock%}
 </div>
@@ -72,9 +71,9 @@ hello {{user.username}}
 
 
 <div id="footer">
-<a href="mailto:deanraccoon@gmail.com">contact me</a>
+	<a href="mailto:deanraccoon@gmail.com">{% trans 'contact me'%}</a>
 &nbsp;
-<a href="https://github.com/thesues/newsmth">open source</a>
+<a href="https://github.com/thesues/newsmth">{% trans 'open source' %}</a>
 </div>
 </body>
 </html>

@@ -1,9 +1,10 @@
 {%extends "smthtop10/base.html" %}
 
+{%load i18n %}
 {%block content%}
-add deanraccoon@gmail.com to Your Kindle Approved E-mail List
-<p>
-because i used my gmail account to send  you guys emails
+{% trans 'add deanraccoon@gmail.com to Your Kindle Approved E-mail List' %}
+<br>
+{% trans 'because I used my gmail account to send  you guys emails' %}
 <p>
 thanks
 {%endblock%}

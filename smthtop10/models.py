@@ -28,12 +28,13 @@ class Feed():
 UPDATE_TIME=(
         (7,"7:00"),
         (13,"13:00"),
-        (19,"19:00")
+        (19,"19:00"),
+        (-1,"do not send")
         )
 class UserProfile(models.Model):
     kindlemail=models.EmailField(max_length=75)
     user=models.ForeignKey(User,unique=True)
-    updateTime=models.IntegerField(choices=UPDATE_TIME,default=0)
+    updateTime=models.IntegerField(choices=UPDATE_TIME,default=-1)
     def __unicode__(self):
         return unicode(self.user.username)
 
