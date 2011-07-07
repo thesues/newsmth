@@ -11,6 +11,7 @@ from django.core.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
+from django.template import RequestContext 
 
 
 def mk_paginator(request, items, num_items):
@@ -31,7 +32,7 @@ def mk_paginator(request, items, num_items):
 def main(request):
     threads=Thread.objects.order_by('-date')
     threads=mk_paginator(request,threads,10);
-    return render_to_response("smthtop10/main.html",add_csrf(request,threads=threads))
+    return render_to_response("smthtop10/main.html",add_csrf(request,threads=threads),context_instance=RequestContext(request))
     
 
 @login_required
@@ -45,7 +46,7 @@ def profile(request,pk):
             return HttpResponseRedirect(reverse("smthtop10.views.main"));
     else:
         pf=ProfileForm(instance=profile)
-    return render_to_response("smthtop10/profile.html",add_csrf(request,pf=pf))
+    return render_to_response("smthtop10/profile.html",add_csrf(request,pf=pf),context_instance=RequestContext(request)) 
 
 @login_required
 def deleteUser(request,pk):
@@ -59,13 +60,8 @@ def deleteUser(request,pk):
 
 def add_csrf(request,**kwargs):
     d=dict(user=request.user,**kwargs)
-    d.update(csrf(request))
+    #d.update(csrf(request))
     return d
 
 def help(request):
-    return render_to_response("smthtop10/help.html",add_csrf(request))
-
-
-
-
-
+    return render_to_response("smthtop10/help.html",add_csrf(request),context_instance=RequestContext(request)) 

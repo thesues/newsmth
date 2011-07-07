@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>newsmth top10 for kindle</title>
-<link href="/media/css/kindle.css" rel="stylesheet" type="text/css"/>
+<link href="{{MEDIA_URL}}/css/kindle.css" rel="stylesheet" type="text/css"/>
 </head>
 {% load i18n %}
 <body>
@@ -37,8 +37,8 @@ hello {{user.username}}
 <div id="pushtext">
 {%for thread in threads.object_list%}
 {{thread.date|date:"Y m d"}}
-<a class="actionButton textButton" href="/media/{{thread.location}}">HTML</a>
-<a class="actionButton textButton" href="/media/{{thread.mobiLocation}}">MOBI</a>
+<a class="actionButton textButton" href="{{MEDIA_URL}}{{thread.location}}">HTML</a>
+<a class="actionButton textButton" href="{{MEDIA_URL}}{{thread.mobiLocation}}">MOBI</a>
 <br />
 {%endfor%}
         <!-- Next/Prev page links  -->
