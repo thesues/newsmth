@@ -1,9 +1,9 @@
-You (or someone pretending to be you) have asked to register an account at
-{{ site.name }}. If this wasn't you, please ignore this email
-and your address will be removed from our records.
+Your activation key: {{ activation_key }}
 
-welcome to
-http://{{site.domain}}/smthtop10
+Please use this link to activate your account:
 
-Sincerely,
-{{ site.name }} Management
+http://localhost:8000/accounts/activate/{{ activation_key }}/
+
+After activation you can login to the site:
+
+http://localhost:8000/accounts/login/
