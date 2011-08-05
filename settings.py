@@ -103,10 +103,10 @@ CKPATH="/home/zhangdongmao/newsmth/smthtop10/ck/"
 SMTH_URL="http://www.newsmth.net/atomic.php"
 
 ACCOUNT_ACTIVATION_DAYS = 2
-DEFAULT_FROM_EMAIL = 'admin@pushkindle.com'
+DEFAULT_FROM_EMAIL = 'XXX'
 LOGIN_REDIRECT_URL = '/smthtop10'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'deanraccoon@gmail.com'
-EMAIL_HOST_PASSWORD = 'roccoon'
+EMAIL_HOST_PASSWORD = 'XXX'
 EMAIL_PORT = 587
