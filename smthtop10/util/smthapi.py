@@ -30,7 +30,7 @@ class SimpleSMTH:
         post_data = urllib.urlencode({'id':uid,
 		                              'passwd':psw,
 		                              'kick_multi':1})
-        path = 'http://www.newsmth.net/bbslogin.php/'
+        path = 'http://www.newsmth.net/bbslogin.php'
         try:
             opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(self.cj))
             opener.addheaders = [('User-agent','Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)')]

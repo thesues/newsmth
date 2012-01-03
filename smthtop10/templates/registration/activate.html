@@ -1,9 +1,6 @@
-<html>
-    <head>
-        <title>Activation</title>
-    </head>
-    <body>
-        <h2>Your account is now active!</h2>
-		<a href="{%url django.contrib.auth.views.login %}?next=/smthtop10/">Login</a>
-    </body>
-</html>
+{% extends "smthtop10/base.html" %}
+{% block title %}Activation complete{% endblock %}
+{% block content%}
+Thanks, activation complete! You may now <a href="{%url django.contrib.auth.views.login%}">login</a> 
+<br>using the username and password you set at registration.
+{% endblock %}

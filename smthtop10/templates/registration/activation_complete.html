@@ -1,5 +1,5 @@
 {% extends "smthtop10/base.html" %}
 {% block title %}Activation complete{% endblock %}
-{% block body %}
-Thanks, activation complete! You may now <a href='{% url auth_login %}'>login</a> using the username and password you set at registration.
+{% block content %}
+Thanks, activation complete! You may now <a href="{%url django.contrib.auth.views.login%}?next={%url smthtop10_main %}">login</a> using the username and password you set at registration.
 {% endblock %}
